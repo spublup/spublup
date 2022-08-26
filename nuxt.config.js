@@ -30,7 +30,9 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [// https://go.nuxtjs.dev/axios
     '@nuxtjs/axios', // https://go.nuxtjs.dev/content
-    '@nuxt/content', '@nuxtjs/auth-next',],
+    '@nuxt/content',
+    '@nuxtjs/auth-next',
+  ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
@@ -44,8 +46,8 @@ export default {
         scheme: 'oauth2',
         endpoints: {
           authorization: 'https://id.twitch.tv/oauth2/authorize',
-          token: 'https://id.twitch.tv/oauth2/token',
-          userInfo: 'https://api.twitch.tv/kraken/user',
+          // token: 'https://id.twitch.tv/oauth2/token',
+          // userInfo: 'https://api.twitch.tv/helix/users',
         },
         token: {
           property: 'access_token', type: 'Bearer', maxAge: 3600,
@@ -54,14 +56,21 @@ export default {
           property: 'refresh_token', maxAge: 60 * 60 * 24 * 30,
         },
         responseType: 'token',
-        grantType: 'authorization_code',
-        accessType: 'offline',
+        // grantType: 'authorization_code',
+        // accessType: 'offline',
         redirectUri: process.env.TWITCH_REDIRECT_URI, // http://localhost:3000/api/twitch/callback
         clientId: process.env.TWITCH_CLIENT_ID,
-        scope: ['openid', 'user:read:email', 'user_read'],
+        clientSecret: process.env.TWITCH_CLIENT_SECRET,
         state: process.env.TWITCH_STATE_SECRET,
+        scope: ['openid', 'user:read:email', 'user_read'],
       },
-    }
+    },
+
+    redirect: {
+      login: '/login',
+      callback: '/callback',
+      home: '/'
+    },
   }, // Content module configuration: https://go.nuxtjs.dev/config-content
   content: {},
 

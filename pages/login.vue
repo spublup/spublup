@@ -24,7 +24,7 @@
 export default {
   layout: 'auth',
   name: "login.vue",
-  methods:{
+  methods: {
     userLogin() {
       this.$auth.loginWith('twitch')
     }

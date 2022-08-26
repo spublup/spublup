@@ -1,5 +1,7 @@
 <template>
-
+  <pre>
+    {{ this.$auth.user }}
+  </pre>
 </template>
 
 <script>
